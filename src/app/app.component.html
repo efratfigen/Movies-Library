@@ -1,0 +1,13 @@
+<h1>The library of the "Back to the Future"</h1>
+<div id="container" fxLayout="row" fxLayoutAlign="space-between start">
+  <mat-tab-group>
+    <mat-tab *ngFor="let type of itemsTypes.data">
+      <ng-template mat-tab-label>{{type}}({{itemsListMap.data[type].length}})</ng-template>
+      <app-items-view [itemsType]="type"></app-items-view>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-icon class="view-icon" (click)="changeView()" *ngIf="gridView.data" matTooltip="list view" aria-hidden="false">view_list</mat-icon>
+  <mat-icon class="view-icon" (click)="changeView()" *ngIf="!gridView.data" matTooltip="grid view" aria-hidden="false">grid_view</mat-icon>
+</div>
+
+

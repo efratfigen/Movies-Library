@@ -1,0 +1,43 @@
+<div class="items-view-container" [ngClass]="{'grid-view': gridView.data}" >
+
+  <div class="tool-bar" fxLayoutAlign="end start" fxLayout="row">
+    <mat-form-field class="items-search">
+      <input #searchItemsDom matInput placeholder="Search..."
+             (keyup)="searchItemsKeyUp($event.target.value)">
+      <mat-icon matSuffix class="search-icon-clear"
+                [style.visibility]="searchItemsDom.value ? 'visible' : 'hidden'"
+                (click)="searchItemsDom.value = ''; searchItemsKeyUp('');">close
+      </mat-icon>
+      <mat-icon matSuffix class="sim-table-search-icon-search">search</mat-icon>
+    </mat-form-field>
+
+    <mat-icon class="refresh-btn" matSuffix
+              matTooltip="refresh data"
+              matTooltipClass="mt-tooltip-style"
+              (click)="refreshItemsData()">refresh
+    </mat-icon>
+
+    <mat-icon class="sort-btn" matSuffix
+              matTooltip="sort data by {{sortTypeAsc ? 'desc' : 'asc'}}"
+              matTooltipClass="mt-tooltip-style"
+              (click)="sortArray(!sortTypeAsc)">sort_by_alpha
+    </mat-icon>
+  </div>
+
+
+  <div class="card-wrap" >
+    <mat-card class="item-card" *ngFor="let item of itemsListFilter.data">
+      <mat-card-header>
+        <div class="image-wrap" mat-card-avatar>
+          <img src="{{item.Poster}}"  (click)="openItemView(item)" onerror="this.style.display='none'"/>
+        </div>
+        <mat-card-title>
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="{{item.Title}}" value="{{item.Title}}" (blur)="changeItemTitleValue(item, $event)" >
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-subtitle>{{item.Year}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
